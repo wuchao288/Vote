@@ -7,6 +7,7 @@ namespace HWVote
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            //aaa
             filters.Add(new HandleErrorAttribute());
         }
     }
