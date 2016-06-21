@@ -1,0 +1,112 @@
+@import url(http://fonts.useso.com/css?family=Open+Sans:400,600,700);
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans";
+}
+html, body{
+	color: #58666e;
+}
+#main {
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    margin: 0 auto;
+    max-width: 998px;
+    width: 100%;
+}
+#header {
+    background: none repeat scroll 0 0 #23b7e5;
+    color: #fff;
+    font-size: 20px;
+    padding: 30px 15px;
+    text-align: center;
+}
+h2 {
+    background: none repeat scroll 0 0 #cef1fc;
+    margin: 10px 0;
+    padding: 12px 0;
+    text-align: center;
+	font-weight: 400;
+}
+h3 {
+    font-weight: 400;
+}
+p {
+    font-size: 14px;
+    padding: 10px;
+}
+.demos {
+    overflow: hidden;
+}
+.demo {
+    float: left;
+    overflow: hidden;
+    width: 50%;
+}
+
+.demo-title {
+    margin: 0 auto;
+    padding: 15px 0 0;
+    text-align: center;
+}
+.demo-body {
+    margin: 0 auto;
+    width: 146px;
+}
+.item-small {
+    margin: 15px;
+}
+.item-default {
+    margin: 23px 15px;
+}
+.item-big {
+    margin: 25px 15px;
+}
+.code {
+    background: none repeat scroll 0 0 #f2f2f2;
+    font-size: 12px;
+    padding: 10px;
+}
+
+input.radiocheck + label.full.circle:after {
+	content: '\f111'; /*checked*/
+}
+input.radiocheck + label.full.square:after {
+	content: '\f0c8'; /*checked*/
+}
+input.radiocheck + label.full.train:after {
+	content: '\f238'; /*checked*/
+}
+input.radiocheck + label.full.bus:after {
+	content: '\f207'; /*checked*/
+}
+input.radiocheck + label.full.subway:after {
+	content: '\f239'; /*checked*/
+}
+
+input.radiocheck + label.nofull.circle:after {
+	content: '\f111'; /*checked*/
+}
+input.radiocheck + label.nofull.square:after {
+	content: '\f0c8'; /*checked*/
+}
+input.radiocheck + label.nofull.train:after {
+	content: '\f238'; /*checked*/
+}
+input.radiocheck + label.nofull.bus:after {
+	content: '\f207'; /*checked*/
+}
+input.radiocheck + label.nofull.subway:after {
+	content: '\f239'; /*checked*/
+}
+@media (max-width: 400px) {
+	
+	#header {
+		font-size: 16px;
+	}
+	.demo {
+		overflow: hidden;
+		text-align: center;
+		width: 100%;
+	}
+}

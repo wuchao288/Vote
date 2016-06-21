@@ -1,0 +1,166 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Showinfo</title>
+    <style>
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-image: url(/img/01.jpg);
+            background-size: cover;
+        }
+        #main {
+            background-image: url(/img/513781.jpg);
+            /*background-size: cover;*/
+        }
+    </style>
+</head>
+<body>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var h = $(window).height();
+            $("#mainy").height(h-60);
+            Create();
+        });
+    </script>
+    
+        <div id="mainy" style="z-index: 0; border: 0px solid #808080; padding-top: 5px;margin:20px 20px;"></div>
+   
+    <!-- ECharts单文件引入 -->
+    <script src="~/js/echarts.js"></script>
+    <script type="text/javascript">
+        function Create() {
+            var arr = [{ "M1": 23, "M2": 34, "M3": 18, "M4": 23, "M5": 22, "M6": 33 }];
+            var arrcount = new Array();
+            for (var i in arr[0]) {
+                arrcount.push(arr[0][i]);
+            }
+            //console.info(arrcount);
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('mainy'));
+            option = {
+                title: {
+                    text: '血小板预防性输注的利与弊',
+                    subtext: '本轮共71投票',
+                    x: 'center',
+                    textStyle: {
+                        color: "#FFE44D",
+                        fontSize: 26,
+                    },
+                    subtextStyle: {
+                        color: "#FFE44D",
+                        fontSize: 20,
+                    }
+                },
+
+                tooltip: {
+                    trigger: 'axis'
+                },
+                   legend: {
+                       data: ['票数(单位：票)'],
+                       x: 'left',
+                       textStyle: {
+                           color: "#FFE44D ",
+                           fontSize: 18
+                       }
+                   },
+                toolbox: {
+                    show: false,
+                    feature: {
+                        mark: { show: true },
+                        dataView: { show: true, readOnly: false },
+                        magicType: { show: true, type: ['bar'] },
+                        restore: { show: true },
+                        saveAsImage: { show: true }
+                    }
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ['郑国静', '郑国静', '郑国静', '郑国静', '郑国静', '郑国静'],
+                        splitLine: false,
+                        axisLine: {
+                            show: true,
+                            onZero: true,
+                            lineStyle: {
+                                color: '#FFFFFF',
+                                type: 'solid',
+                                width: 3,
+                                shadowColor: 'rgba(0,0,0,0)',
+                                shadowBlur: 5,
+                                shadowOffsetX: 3,
+                                shadowOffsetY: 3,
+                            },
+                        },
+                        axisLabel: {
+                            show: true,
+                            interval: 'auto',
+                            rotate: 0,
+                            margin: 8,
+                            clickable: false,
+                            formatter: null,
+                            textStyle: {
+                                color: "#FFE44D",
+                                //align: <各异>,
+                                //baseline: <各异>,
+                                fontSize: 28,
+                            },
+                        },
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        splitLine: false,
+                        axisLine: {
+                            show: true,
+                            onZero: true,
+                            lineStyle: {
+                                color: '#FFFFFF',
+                                type: 'solid',
+                                width: 3,
+                                shadowColor: 'rgba(0,0,0,0)',
+                                shadowBlur: 5,
+                                shadowOffsetX: 3,
+                                shadowOffsetY: 3,
+                            },
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: '总票数',
+                        type: 'bar',
+                        data: arrcount,
+                        barWidth: 60,//柱图宽度
+                        itemStyle: {
+                            normal: {
+                                color: 'rgba(32,77,120,0.8)',
+                                barBorderRadius: 0,
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        fontSize: 25,
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            };
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+﻿@{
+    Layout = null;
+}
+@{
+    List<UserInfo> list = ViewBag.list;
+
+    Vote_session info = ViewBag.info;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>@info.Title 投票列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/radiocheck.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <style>
+       
+			body{
+				background-image:url(/img/00.jpg) ;
+				background-size:cover; 
+				padding: 0px;
+				margin: 0px;
+				
+			}
+        .divc {
+            padding:0 10px;
+        }
+        .top p {
+            padding: 0 10px;
+            color: #ffffff;
+          
+        }
+			/*.top p:last-of-type{
+				color: blue;
+			}*/
+			.list{
+				
+				height: 60px;
+				line-height: 60px;
+				padding-left: 15px;
+				
+				background-color: #045A7D;
+		      	background-color:rgba(4,90,145,0.8);
+				margin-bottom: 10px;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+               
+			}
+            .face {
+                background-color: rgba(255,0,0,0.8);
+            }
+			.list div{
+				float: left;
+			}
+			.list div:last-of-type{
+				float: right;
+				width: 60px;
+				padding-right: 15px;
+				clear:right;
+			}
+			/*.list div:last-of-type input{
+				-webkit-appearance:none;
+				background:#14B9F9 ;
+				width: 60px;
+				border: none;
+				height: 30px;
+				line-height: 30px;
+				font-size:1.0em ;
+				color: white;
+				border-radius: 5px;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+				-webkit-border-radius: 5px;
+				-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+			}*/
+			.list div:nth-child(2){
+				line-height: 8px;
+				color:#FFFFFF;
+				margin-left: 10px;
+			}
+			.list p{
+				margin-top: 10px;
+				padding-top: 0px;
+			}
+			.customer-photo {
+		    display: inline-block;
+		    width: 50px;
+		    height: 50px;
+		    border-radius: 50%;
+		    background-size: 40px 44px;
+		    background-position: center center;
+		    background-repeat: no-repeat;
+		    vertical-align: middle;
+		    line-height: 41px;
+		    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+		}
+		.top_p{
+			text-align:center;margin-bottom:0px;margin-top:10px;font-size: 1.4em;line-height:1.4em;
+		}
+
+        .action {
+            position: fixed;
+            z-index: 10000;
+            height: 110px;
+            width: 100%;
+            /* max-width: 640px; */
+            height: 46px;
+            bottom: 0;
+            text-align: center;
+            background-color: #509506;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+       
+            .action input[type="submit"] {
+                background: #509506;
+                width: 100%;
+                border: none;
+                /*height: 45px;
+                line-height: 45px;*/
+                font-size: 1.2em;
+                color: white;
+                margin-top: 10px;
+                padding: 0 20px 0 20px;
+                border-radius: 5px;
+            }
+    </style>
+    <script>
+    @Html.Raw(ViewBag.mag)
+ 
+    function checkRadio() {
+      var fnode = document.getElementsByName("face");
+      var fcount = 0;
+      for (var i = 0; i < fnode.length; i++) {
+          if (fnode[i].checked) {
+              fcount++;
+              break;
+          }
+      }
+      if (fcount==0) {
+          alert("请选择一个红方选手！");
+          return false;
+      }
+      var bnode = document.getElementsByName("back");
+      var bcount = 0;
+      for (var i = 0; i < bnode.length; i++) {
+          if (bnode[i].checked) {
+              bcount++;
+              break;
+          }
+      }
+      if (bcount == 0) {
+          alert("请选择一个蓝方选手！");
+          return false;
+      }
+      return true;
+    }
+    </script>
+
+</head>
+<body>
+    <div class="top">
+        <p style="margin-bottom: 5px !important; margin-top: 10px; font-size: 0.9em;">@info.Title：</p>
+        <p class="top_p">@Html.Raw(info.TitleDesc)</p>
+    </div>
+    <form action="/home/list" method="post" onsubmit="return checkRadio()">
+        <div class="divc">
+            <p style="color: #045A7D; margin-bottom: 10px; font-weight: bold; font-size: 0.9em;">@info.FaceTitle</p>
+           
+            <input type="hidden" name="vscode" value="@ViewBag.vscode" />
+            @foreach (var item in list.Where(n => n.ForB == 1).OrderBy(n => n.UserIndex))
+            {
+                <div class="list face">
+                    <div>
+                        <img class="customer-photo" src="~/img/00.jpg">
+                    </div>
+                    <div>
+                        <p style="font-size: 1em;">
+                            @item.UserTitle：
+                            <span style="color: yellow;">
+                                @item.UserName
+
+                                @(item.Numer == "-1" ? "" : "(" + item.SumVote + ")")
+                            </span>
+                        </p>
+                        <p style="font-size: .8em;">@item.Hospital</p>
+                    </div>
+                    <div>
+                        @if (item.Numer != "-2")
+                        {
+                            <input type="radio" class="radiocheck" value="@item.ID" name="face" id="radio_@item.ID" /><label class="nofull small left" for="radio_@item.ID" >&nbsp;&nbsp;</label>
+                        }
+                    </div>
+                </div>
+            }
+
+
+            <p style="color:#045A7D ;margin-bottom: 10px;font-weight: bold;">@info.BackTitle</p>
+
+            @foreach (var item in list.Where(n => n.ForB == 2).OrderBy(n => n.UserIndex))
+            {
+                <div class="list">
+                    <div>
+                        <img class="customer-photo" src="/img/@item.UserImg">
+                    </div>
+                    <div>
+                        <p style="font-size: 1.0em;">
+                            @item.UserTitle：<span style="color: yellow;">
+                                @item.UserName
+                                @(item.Numer == "-1" ? "" : "(" + item.SumVote + ")")
+                            </span>
+                        </p>
+                        <p style="font-size: .8em;">@item.Hospital</p>
+                    </div>
+                    <div>
+                        @if (item.Numer != "-2")
+                        {
+                            <input type="radio" class="radiocheck" value="@item.ID" name="back" id="radio_@item.ID" /><label class="nofull small left" for="radio_@item.ID">&nbsp;&nbsp;</label>
+                        }
+                    </div>
+                </div>
+            }
+            <div style="height:60px;">
+            </div>
+        </div>
+        @if (list.FirstOrDefault().Numer != "-2")
+        {
+           <div class="action">
+            <input type="submit" value="确&nbsp;&nbsp;&nbsp;&nbsp;定" />
+        </div>
+        }
+     
+
+    </form>
+</body>
+</html>
