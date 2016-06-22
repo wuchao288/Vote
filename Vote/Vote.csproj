@@ -147,7 +147,28 @@
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="img\00.jpg" />
+    <Content Include="img\01.jpg" />
     <Content Include="img\head.jpg" />
+    <Content Include="img\sprite.png" />
+    <Content Include="img\万奔鸣.jpg" />
+    <Content Include="img\付斌.jpg" />
+    <Content Include="img\刘樱子.jpg" />
+    <Content Include="img\刘灿.jpg" />
+    <Content Include="img\庄兰.jpg" />
+    <Content Include="img\张冬华.jpg" />
+    <Content Include="img\张帆.jpg" />
+    <Content Include="img\03.jpg" />
+    <Content Include="img\曹翊雄.jpg" />
+    <Content Include="img\朱平.jpg" />
+    <Content Include="img\李岭.jpg" />
+    <Content Include="img\李毅.jpg" />
+    <Content Include="img\李睿娟.jpg" />
+    <Content Include="img\杨晓刚.jpg" />
+    <Content Include="img\胡国瑜.jpg" />
+    <Content Include="img\谭振清.jpg" />
+    <Content Include="img\贺丽芳.jpg" />
+    <Content Include="img\闵沙东.jpg" />
+    <Content Include="img\齐慧.jpg" />
     <Content Include="js\echarts.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="Models\Generated\Database.tt">
@@ -160,9 +181,12 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\svote.pubxml" />
     <None Include="Properties\PublishProfiles\vote.pubxml" />
-    <Content Include="Views\Home\Showinfo.cshtml" />
     <None Include="Views\Home\voteorder.cshtml" />
+    <Content Include="Views\Home\Showinfo.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

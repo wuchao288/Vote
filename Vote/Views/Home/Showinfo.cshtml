@@ -13,43 +13,150 @@
         body {
             padding: 0px;
             margin: 0px;
-            background-image: url(/img/01.jpg);
-            background-size: cover;
+            background-image: url(/img/03.jpg);
+            /*background-repeat: no-repeat;*/
+            background-size: 100% 100%;
         }
         #main {
-            background-image: url(/img/513781.jpg);
+            /*background-image: url(/img/513781.jpg);*/
             /*background-size: cover;*/
+        }
+
+        .sls {
+            -webkit-transition: all .3s ease-in;
+            -moz-transition: all .3s ease-in;
+            -o-transition: all .3s ease-in;
+            transition: all .3s ease-in;
+            opacity: .5;
+            filter: alpha(opacity=50);
+            width: 45px;
+            height: 100px;
+            position: absolute;
+            left: 0px;
+            top: 50%;
+            margin-top: -50px;
+            z-index: 30000;
+            background: url(/img/sprite.png) no-repeat left top;
+        }
+
+        .cls {
+            width: 45px;
+            height: 100px;
+            position: absolute;
+            left: 0px;
+            top: 100%;
+            margin-top: -50px;
+            z-index: 30000;
+        } 
+        .srs {
+            -webkit-transition: all .3s ease-in;
+            -moz-transition: all .3s ease-in;
+            -o-transition: all .3s ease-in;
+            transition: all .3s ease-in;
+            opacity: .5;
+            filter: alpha(opacity=50);
+            width: 45px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            z-index: 30000;
+            background: url(/img/sprite.png) no-repeat left top;
+            /*left: auto;*/
+            right: 0px;
+            background-position: right top;
+        }
+        #p1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 2em;
+            color: yellow;
+            padding-bottom: 0px;
+            margin-bottom: 10px;
+            /*position: absolute;
+            left:50%;
+            top:0px;
+            margin-top: -50px;
+            z-index: 30000;*/
+        }
+        #p2 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1em;
+            color: yellow;
+            margin-top:0px;
         }
     </style>
 </head>
 <body>
     <script src="~/js/jquery.min.js"></script>
     <script>
+        var ib = null;
+        var vsid = 1;
+        var timeout = false; //启动及关闭按钮  
+        function Start() {
+            if (timeout) return;
+            $(".srs").click();
+            setTimeout(Start, 3000); //time是指本身,延时递归调用自己,100为间隔调用时间,单位毫秒  
+        }
         $(function () {
             var h = $(window).height();
-            $("#mainy").height(h-60);
-            Create();
+            $("#mainy").height(h -140);
+            DoWork(0);
+            Start();
         });
+        function ReStart() {
+            timeout = false;
+            Start();
+        }
+        function DoWork(index) {
+            index = index || 0;
+            var id = index + vsid;
+            if (id == 4) {
+                id = 1;
+            }
+            if(id==0){
+                id = 3;
+            }
+            $.post("/home/GetVsInfo", "vsid=" + id, function (data) {
+                vsid = id;
+                Create(data.arrcount, data.arruser, data.info, data.count);
+            });
+        }
+        function End() {
+            timeout = true;
+        }
+        
     </script>
-    
-        <div id="mainy" style="z-index: 0; border: 0px solid #808080; padding-top: 5px;margin:20px 20px;"></div>
-   
+    <a href="javascript:void(0)" onclick="DoWork(-1)" value="0" class="sls"></a>
+    <a href="javascript:void(0)" onclick="DoWork(1)" class="srs" value="1"></a>
+        <p id="p1"></p>
+        <p id="p2"></p>
+        <div id="mainy" style="z-index: 0; border: 0px solid #808080;">
+           
+        </div>
+    @*<span class="cls">
+        <a href="javascript:void(0)" title="启动" onclick="ReStart()"><</a>&nbsp;&nbsp;
+        <a href="javascript:void(0)"  title="暂停" onclick="End()">></a>
+    </span>*@
     <!-- ECharts单文件引入 -->
     <script src="~/js/echarts.js"></script>
     <script type="text/javascript">
-        function Create() {
-            var arr = [{ "M1": 23, "M2": 34, "M3": 18, "M4": 23, "M5": 22, "M6": 33 }];
-            var arrcount = new Array();
-            for (var i in arr[0]) {
-                arrcount.push(arr[0][i]);
-            }
+        function Create(arrcount, arruser, info, count) {
+            $("#p1").text(info.Title + ":" + info.TitleDesc.replace('<br>', ''));
+            $("#p2").text('本轮共计:' + count + '人参与投票');
+            //var arr = [{ "M1": 23, "M2": 34, "M3": 18, "M4": 23, "M5": 22, "M6": 33 }];
+            //var arrcount = new Array();
+            //for (var i in arr[0]) {
+            //    arrcount.push(arr[0][i]);
+            //}
             //console.info(arrcount);
             // 基于准备好的dom，初始化echarts图表
             var myChart = echarts.init(document.getElementById('mainy'));
             option = {
                 title: {
-                    text: '血小板预防性输注的利与弊',
-                    subtext: '本轮共71投票',
+                    text:info.Title +":"+ info.TitleDesc.replace('<br>', ''),
+                    subtext: '本轮共计:' + count + '人参与投票',
                     x: 'center',
                     textStyle: {
                         color: "#FFE44D",
@@ -58,7 +165,8 @@
                     subtextStyle: {
                         color: "#FFE44D",
                         fontSize: 20,
-                    }
+                    },
+                    show: false
                 },
 
                 tooltip: {
@@ -85,7 +193,7 @@
                 xAxis: [
                     {
                         type: 'category',
-                        data: ['郑国静', '郑国静', '郑国静', '郑国静', '郑国静', '郑国静'],
+                        data: arruser,
                         splitLine: false,
                         axisLine: {
                             show: true,
@@ -140,7 +248,7 @@
                         name: '总票数',
                         type: 'bar',
                         data: arrcount,
-                        barWidth: 60,//柱图宽度
+                        barWidth: 120,//柱图宽度
                         itemStyle: {
                             normal: {
                                 color: 'rgba(32,77,120,0.8)',
