@@ -82,7 +82,7 @@ namespace Vote.Controllers
                 Vote_User vuser = bs.FirstOrDefault<Vote_User>(Sql.Builder.Where("vscode=@0 and VsID=(select top 1 id from Vote_session where VState=1)", vscode)); ;
                 if (vuser!=null)
                 { 
-                    ViewBag.mag = "alert('投票码已经投过当前场次!')";
+                    //ViewBag.mag = "alert('投票码已经投过当前场次!')";
                 }
                 else
                 {
