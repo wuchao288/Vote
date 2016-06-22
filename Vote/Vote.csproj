@@ -183,6 +183,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\svote.pubxml" />
     <None Include="Properties\PublishProfiles\vote.pubxml" />
+    <Content Include="Views\Home\code.cshtml" />
     <None Include="Views\Home\voteorder.cshtml" />
     <Content Include="Views\Home\Showinfo.cshtml">
       <SubType>Code</SubType>

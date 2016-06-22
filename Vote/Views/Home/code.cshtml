@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MVote.VsCode>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>code</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    
+    <table border="1" style="border:1px solid #000000;border-collapse:collapse;">
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                编码
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vscode)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

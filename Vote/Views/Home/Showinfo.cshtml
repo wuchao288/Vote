@@ -67,12 +67,15 @@
             background-position: right top;
         }
         #p1 {
+            font-family:微软雅黑;
             text-align: center;
             font-weight: bold;
-            font-size: 2em;
+            font-size: 2.5em;
             color: yellow;
             padding-bottom: 0px;
-            margin-bottom: 10px;
+            margin-bottom: 0px;
+             padding:0px;
+             margin-top:20px;
             /*position: absolute;
             left:50%;
             top:0px;
@@ -80,11 +83,14 @@
             z-index: 30000;*/
         }
         #p2 {
+            font-family:微软雅黑;
             text-align: center;
             font-weight: bold;
-            font-size: 1em;
+            font-size: 2em;
             color: yellow;
             margin-top:0px;
+             margin-bottom:0px;
+             padding:0px;
         }
     </style>
 </head>
@@ -101,9 +107,9 @@
         }
         $(function () {
             var h = $(window).height();
-            $("#mainy").height(h -140);
+            $("#mainy").height(h -120);
             DoWork(0);
-            Start();
+            //Start();
         });
         function ReStart() {
             timeout = false;
@@ -155,16 +161,17 @@
             var myChart = echarts.init(document.getElementById('mainy'));
             option = {
                 title: {
+                    padding: 0,
                     text:info.Title +":"+ info.TitleDesc.replace('<br>', ''),
                     subtext: '本轮共计:' + count + '人参与投票',
                     x: 'center',
                     textStyle: {
                         color: "#FFE44D",
-                        fontSize: 26,
+                        fontSize: 2,
                     },
                     subtextStyle: {
                         color: "#FFE44D",
-                        fontSize: 20,
+                        fontSize: 2,
                     },
                     show: false
                 },
@@ -172,12 +179,13 @@
                 tooltip: {
                     trigger: 'axis'
                 },
-                   legend: {
+                legend: {
+                       show: false,
                        data: ['票数(单位：票)'],
                        x: 'left',
                        textStyle: {
                            color: "#FFE44D ",
-                           fontSize: 18
+                           fontSize: 2
                        }
                    },
                 toolbox: {
@@ -220,6 +228,8 @@
                                 //align: <各异>,
                                 //baseline: <各异>,
                                 fontSize: 28,
+                                fontFamily: '微软雅黑',
+                                fontWeight: 'bold'
                             },
                         },
                     }
@@ -240,7 +250,22 @@
                                 shadowOffsetX: 3,
                                 shadowOffsetY: 3,
                             },
-                        }
+                        },
+                        axisLabel: {
+                            show: true,
+                            interval: 'auto',
+                            rotate: 0,
+                            margin: 8,
+                            clickable: false,
+                            formatter: null,
+                            textStyle: {
+                                color: "#FFE44D",
+                                //align: <各异>,
+                                //baseline: <各异>,
+                                fontSize: 18,
+                                fontFamily: '微软雅黑'
+                            },
+                        },
                     }
                 ],
                 series: [
@@ -248,7 +273,7 @@
                         name: '总票数',
                         type: 'bar',
                         data: arrcount,
-                        barWidth: 120,//柱图宽度
+                        barWidth: 80,//柱图宽度
                         itemStyle: {
                             normal: {
                                 color: 'rgba(32,77,120,0.8)',
@@ -257,8 +282,9 @@
                                     show: true,
                                     position: 'top',
                                     textStyle: {
-                                        fontSize: 25,
-                                        fontWeight: 'bold'
+                                        fontSize: 30,
+                                        fontWeight: 'bold',
+                                        color: '#FFE44D'
                                     }
                                 }
                             }

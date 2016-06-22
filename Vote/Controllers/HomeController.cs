@@ -247,5 +247,14 @@ namespace Vote.Controllers
                  });
              }           
         }
+        public ActionResult code()
+        {
+            using (IDatabase bs = VoteDB.GetInstance())
+            {
+
+                List<VsCode> listuser = bs.Fetch<VsCode>();
+                return View(listuser);
+            }
+        }
     }
 }
