@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $.get("http://localhost:2323/ApiArea/api/Values",function (value) {
+            alert(value);
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        
+    </div>
+</body>
+</html>

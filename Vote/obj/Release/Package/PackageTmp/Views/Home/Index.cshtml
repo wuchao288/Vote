@@ -7,13 +7,12 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport"> 
     <style>
         body {
             background-image: url(/img/00.jpg);
             background-size: cover;
         }
-
         .top {
             margin-top: 20%;
             color: white;
@@ -21,32 +20,29 @@
             font-size: 1.5em;
             /*text-shadow: 0px 0px 9px #000000;*/
         }
-
-            .top p {
-                margin: 0px;
-                padding: 0px;
-                margin-top: 20px;
-            }
-
+        .top p {
+            margin: 0px;
+            padding: 0px;
+            margin-top: 20px;
+        }
         .action {
             padding-top: 80px;
             text-align: center;
         }
-
-            .action input[type="text"] {
-                background: #4BC9FB;
-                width: 60%;
-                border: none;
-                height: 50px;
-                color: white;
-                margin-top: 5px;
-                padding: 0 20px 0 20px;
-                border: #EBF8FE 1px solid;
-                border-radius: 5px;
-                margin-bottom: 10px;
-            }
-
+        .action input[type="text"] {
+            background: #4BC9FB;
+            width: 60%;
+            border: none;
+            height: 50px;
+            color: white;
+            margin-top: 5px;
+            padding: 0 20px 0 20px;
+            border: #EBF8FE 1px solid;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
             .action input[type="submit"] {
+                -webkit-appearance: none;
                 background: #509506;
                 width: 73%;
                 border: none;
@@ -65,7 +61,6 @@
             var value = document.getElementById("vscode").value;
             localStorage.setItem("vscode", value);//存储数据 
         }
-       
     </script>
 </head>
 <body>
@@ -83,7 +78,5 @@
 </body>
 </html>
 <script>
-  
-        document.getElementById("vscode").value = localStorage.getItem("vscode");
-    
+    document.getElementById("vscode").value = localStorage.getItem("vscode");
 </script>

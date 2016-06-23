@@ -256,5 +256,11 @@ namespace Vote.Controllers
                 return View(listuser);
             }
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
     }
 }

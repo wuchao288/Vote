@@ -13,7 +13,7 @@
 
     <meta charset="UTF-8">
     <title>@info.Title 投票列表</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport"> 
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/css/radiocheck.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
@@ -57,7 +57,7 @@
 			}
 			.list div:last-of-type{
 				float: right;
-				width: 60px;
+				width: 30px;
 				padding-right: 15px;
 				clear:right;
 			}
@@ -113,8 +113,9 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
-       
+
             .action input[type="submit"] {
+                -webkit-appearance: none;
                 background: #509506;
                 width: 100%;
                 border: none;
@@ -167,22 +168,25 @@
     </div>
     <form action="/home/list" method="post" onsubmit="return checkRadio()">
         <div class="divc">
-            <p style="color: #045A7D; margin-bottom: 10px; font-weight: bold; font-size: 0.9em;">@info.FaceTitle</p>
+            <p style="color: #045A7D; margin-bottom: 10px; font-weight: bold; font-size: 0.9em;">红方： @info.FaceTitle</p>
            
             <input type="hidden" name="vscode" value="@ViewBag.vscode" />
             @foreach (var item in list.Where(n => n.ForB == 1).OrderBy(n => n.UserIndex))
             {
+                string str = item.UserName+".jpg";
                 <div class="list face">
                     <div>
-                        <img class="customer-photo" src="~/img/00.jpg">
+                        
+                        <img class="customer-photo" src="/img/@str">
+                        @*<img class="customer-photo" src="~/img/00.jpg">*@
                     </div>
                     <div>
                         <p style="font-size: 1em;">
                             @item.UserTitle：
                             <span style="color: yellow;">
                                 @item.UserName
-
-                                @(item.Numer == "-1" ? "" : "(" + item.SumVote + ")")
+                                
+                               @(item.Numer == "-1" ? "" : "(" + item.SumVote + ")")@item.UserDese
                             </span>
                         </p>
                         <p style="font-size: .8em;">@item.Hospital</p>
@@ -197,19 +201,22 @@
             }
 
 
-            <p style="color:#045A7D ;margin-bottom: 10px;font-weight: bold;">@info.BackTitle</p>
+            <p style="color:#045A7D ;margin-bottom: 10px;font-weight: bold;">蓝方：@info.BackTitle</p>
 
             @foreach (var item in list.Where(n => n.ForB == 2).OrderBy(n => n.UserIndex))
             {
+                string str = item.UserName + ".jpg";
                 <div class="list">
                     <div>
-                        <img class="customer-photo" src="/img/@item.UserImg">
+                        <img class="customer-photo" src="/img/@str">
+                        @*<img class="customer-photo" src="/img/@item.UserImg">*@
+                        
                     </div>
                     <div>
                         <p style="font-size: 1.0em;">
                             @item.UserTitle：<span style="color: yellow;">
                                 @item.UserName
-                                @(item.Numer == "-1" ? "" : "(" + item.SumVote + ")")
+                                @(item.Numer == "-1" ? "" : "(" + item.SumVote + ")") @item.UserDese
                             </span>
                         </p>
                         <p style="font-size: .8em;">@item.Hospital</p>
