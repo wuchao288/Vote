@@ -70,7 +70,7 @@
             font-family:微软雅黑;
             text-align: center;
             font-weight: bold;
-            font-size: 2.5em;
+            font-size: 2.2em;
             color: yellow;
             padding-bottom: 0px;
             margin-bottom: 0px;
@@ -86,7 +86,7 @@
             font-family:微软雅黑;
             text-align: center;
             font-weight: bold;
-            font-size: 2em;
+            font-size: 1.8em;
             color: yellow;
             margin-top:0px;
              margin-bottom:0px;
@@ -151,12 +151,7 @@
         function Create(arrcount, arruser, info, count) {
             $("#p1").text(info.Title + ":" + info.TitleDesc.replace('<br>', ''));
             $("#p2").text('本轮共计:' + count + '人参与投票');
-            //var arr = [{ "M1": 23, "M2": 34, "M3": 18, "M4": 23, "M5": 22, "M6": 33 }];
-            //var arrcount = new Array();
-            //for (var i in arr[0]) {
-            //    arrcount.push(arr[0][i]);
-            //}
-            //console.info(arrcount);
+            
             // 基于准备好的dom，初始化echarts图表
             var myChart = echarts.init(document.getElementById('mainy'));
             option = {
@@ -227,7 +222,7 @@
                                 color: "#FFE44D",
                                 //align: <各异>,
                                 //baseline: <各异>,
-                                fontSize: 28,
+                                fontSize: 20,
                                 fontFamily: '微软雅黑',
                                 fontWeight: 'bold'
                             },
@@ -276,15 +271,15 @@
                         barWidth: 80,//柱图宽度
                         itemStyle: {
                             normal: {
-                                color: 'rgba(32,77,120,0.8)',
+                                color: 'rgba(255,0,0,0.8)',
                                 barBorderRadius: 0,
                                 label: {
                                     show: true,
                                     position: 'top',
                                     textStyle: {
-                                        fontSize: 30,
+                                        fontSize:35 ,
                                         fontWeight: 'bold',
-                                        color: '#FFE44D'
+                                        color: 'rgba(255,0,0,0.8)'
                                     }
                                 }
                             }

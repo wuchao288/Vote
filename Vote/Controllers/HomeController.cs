@@ -236,12 +236,12 @@ namespace Vote.Controllers
  SELECT b.UserID,CASE WHEN Vscode LIKE 'a%' THEN SumVote*3 ELSE SumVote END SumVote  FROM (                 
  SELECT UserID,Vscode, COUNT(*) SumVote FROM Vote_user GROUP BY UserID,Vscode) b) c GROUP BY c.UserID)b ON a.ID=b.UserID
                   ").Where("a.vsid=@0",vsid);
-                 List<UserInfo> listuser = bs.Fetch<UserInfo>(sql).OrderByDescending(n => n.SumVote).ToList();
+                 List<UserInfo> listuser = bs.Fetch<UserInfo>(sql).ToList();
 
                  int c = bs.Single<int>(Sql.Builder.Append("SELECT COUNT(*) CO FROM (SELECT Vscode,COUNT(*) aa FROM Vote_User WHERE VsID=@0 GROUP BY Vscode)t", vsid));
                  return Json(new { 
                      info = vs, 
-                     arruser = listuser.Select(n => n.UserName), 
+                     arruser = listuser.Select(n => n.UserName+(n.ForB==1?"(红)":"(蓝)")), 
                      arrcount = listuser.Select(n => n.SumVote),
                      count = c
                  });
