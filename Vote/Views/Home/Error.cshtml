@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    <div>
+        <h2>@TempData["errorMsg"]</h2>
+        <p>抱歉，处理您的请求时出错!</p>
+        <div class="reindex">
+            <a href="#" onclick="history.back()">返回</a>
+        </div>
+    </div>
+</body>
+</html>

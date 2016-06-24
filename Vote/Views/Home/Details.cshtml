@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVote.Vote_User>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    
+    <table border="1" style="border:1px solid #000000;border-collapse:collapse;">
+        <tr>
+           <th>#</th>
+            <th>
+              场次
+            </th>
+            <th>
+                投票时间
+            </th>
+            <th>
+              投票码
+            </th>
+            <th>
+                票数
+            </th>
+        </tr>
+        @{ int a = 1;}
+        @foreach (var item in Model)
+        {
+            
+            <tr>
+               <td>@a</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VsID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vscode)
+                </td>
+                <td>
+                   @(item.Vscode.StartsWith("a")?3:1)
+                </td>
+            </tr>
+            a++;
+        }
+        <tr>
+            <td colspan="4"></td>
+            <td >@(Model.Where(n=>n.Vscode.StartsWith("a")).Count()*3+Model.Where(n=>!n.Vscode.StartsWith("a")).Count())</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MVote.UserInfo>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>scorelist</title>
+</head>
+<body>
+   
+    <table border="1" style="border:1px solid #000000;border-collapse:collapse;">
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+              姓名
+            </th>
+           
+            <th>
+               红蓝方
+            </th>
+            <th>
+                场次
+            </th>
+            <td>
+               辩手
+            </td>
+            <th>
+               医院
+            </th>
+            <th>
+               票数
+            </th>
+            <th></th>
+        </tr>
+        @{
+            int a = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@a</td>
+                <td>
+
+                    @(item.ForB == 1 ? Html.Raw("<span style='color:red'>" + item.UserName + "</span>") : Html.Raw("<span style='color:blue'>" + item.UserName + "</span>"))
+                </td>
+               
+                <td>
+                    @(item.ForB == 1 ?Html.Raw("<span style='color:red'>红方</span>") : Html.Raw("<span style='color:blue'>蓝方</span>"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VsID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hospital)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SumVote)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                </td>
+            </tr>
+            a++;
+        }
+
+    </table>
+</body>
+</html>

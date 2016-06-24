@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     Layout = null;
 }
 
@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>Showinfo</title>
     <style>
-
         body {
             padding: 0px;
             margin: 0px;
@@ -17,6 +16,7 @@
             /*background-repeat: no-repeat;*/
             background-size: 100% 100%;
         }
+
         #main {
             /*background-image: url(/img/513781.jpg);*/
             /*background-size: cover;*/
@@ -47,7 +47,8 @@
             top: 100%;
             margin-top: -50px;
             z-index: 30000;
-        } 
+        }
+
         .srs {
             -webkit-transition: all .3s ease-in;
             -moz-transition: all .3s ease-in;
@@ -66,31 +67,33 @@
             right: 0px;
             background-position: right top;
         }
+
         #p1 {
-            font-family:微软雅黑;
+            font-family: 微软雅黑;
             text-align: center;
             font-weight: bold;
             font-size: 2.2em;
             color: yellow;
             padding-bottom: 0px;
             margin-bottom: 0px;
-             padding:0px;
-             margin-top:20px;
+            padding: 0px;
+            margin-top: 20px;
             /*position: absolute;
             left:50%;
             top:0px;
             margin-top: -50px;
             z-index: 30000;*/
         }
+
         #p2 {
-            font-family:微软雅黑;
+            font-family: 微软雅黑;
             text-align: center;
             font-weight: bold;
             font-size: 1.8em;
             color: yellow;
-            margin-top:0px;
-             margin-bottom:0px;
-             padding:0px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding: 0px;
         }
     </style>
 </head>
@@ -99,15 +102,15 @@
     <script>
         var ib = null;
         var vsid = 1;
-        var timeout = false; //启动及关闭按钮  
+        var timeout = false; //启动及关闭按钮
         function Start() {
             if (timeout) return;
             $(".srs").click();
-            setTimeout(Start, 3000); //time是指本身,延时递归调用自己,100为间隔调用时间,单位毫秒  
+            setTimeout(Start, 3000); //time是指本身,延时递归调用自己,100为间隔调用时间,单位毫秒
         }
         $(function () {
             var h = $(window).height();
-            $("#mainy").height(h -120);
+            $("#mainy").height(h - 120);
             DoWork(0);
             //Start();
         });
@@ -121,7 +124,7 @@
             if (id == 4) {
                 id = 1;
             }
-            if(id==0){
+            if (id == 0) {
                 id = 3;
             }
             $.post("/home/GetVsInfo", "vsid=" + id, function (data) {
@@ -132,32 +135,32 @@
         function End() {
             timeout = true;
         }
-        
+
     </script>
     <a href="javascript:void(0)" onclick="DoWork(-1)" value="0" class="sls"></a>
     <a href="javascript:void(0)" onclick="DoWork(1)" class="srs" value="1"></a>
-        <p id="p1"></p>
-        <p id="p2"></p>
-        <div id="mainy" style="z-index: 0; border: 0px solid #808080;">
-           
-        </div>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <div id="mainy" style="z-index: 0; border: 0px solid #808080;">
+
+    </div>
     @*<span class="cls">
-        <a href="javascript:void(0)" title="启动" onclick="ReStart()"><</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)"  title="暂停" onclick="End()">></a>
-    </span>*@
+            <a href="javascript:void(0)" title="启动" onclick="ReStart()"><</a>&nbsp;&nbsp;
+            <a href="javascript:void(0)"  title="暂停" onclick="End()">></a>
+        </span>*@
     <!-- ECharts单文件引入 -->
     <script src="~/js/echarts.js"></script>
     <script type="text/javascript">
         function Create(arrcount, arruser, info, count) {
             $("#p1").text(info.Title + ":" + info.TitleDesc.replace('<br>', ''));
             $("#p2").text('本轮共计:' + count + '人参与投票');
-            
+
             // 基于准备好的dom，初始化echarts图表
             var myChart = echarts.init(document.getElementById('mainy'));
             option = {
                 title: {
                     padding: 0,
-                    text:info.Title +":"+ info.TitleDesc.replace('<br>', ''),
+                    text: info.Title + ":" + info.TitleDesc.replace('<br>', ''),
                     subtext: '本轮共计:' + count + '人参与投票',
                     x: 'center',
                     textStyle: {
@@ -175,14 +178,14 @@
                     trigger: 'axis'
                 },
                 legend: {
-                       show: false,
-                       data: ['票数(单位：票)'],
-                       x: 'left',
-                       textStyle: {
-                           color: "#FFE44D ",
-                           fontSize: 2
-                       }
-                   },
+                    show: false,
+                    data: ['票数(单位：票)'],
+                    x: 'left',
+                    textStyle: {
+                        color: "#FFE44D ",
+                        fontSize: 2
+                    }
+                },
                 toolbox: {
                     show: false,
                     feature: {
@@ -277,7 +280,7 @@
                                     show: true,
                                     position: 'top',
                                     textStyle: {
-                                        fontSize:35 ,
+                                        fontSize: 35,
                                         fontWeight: 'bold',
                                         color: 'rgba(255,0,0,0.8)'
                                     }
