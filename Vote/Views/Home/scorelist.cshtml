@@ -26,7 +26,7 @@
                红蓝方
             </th>
             <th>
-                场次
+                <a href="/home/scorelist?order=1">场次</a>
             </th>
             <td>
                辩手
@@ -35,7 +35,8 @@
                医院
             </th>
             <th>
-               票数
+               
+                <a href="/home/scorelist">票数</a>
             </th>
             <th></th>
         </tr>
@@ -67,7 +68,7 @@
                     @Html.DisplayFor(modelItem => item.SumVote)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("详情", "Details", new { id = item.ID }) |
                 </td>
             </tr>
             a++;

@@ -91,7 +91,7 @@ namespace Vote.Controllers
                 if (vs == null)
                 {
                     ViewBag.mag = "alert('投票已经结束或尚未开始!')";
-                    //return RedirectToAction("voteorder");
+                    return RedirectToAction("voteorder");
                 }
                 VsCode code = bs.FirstOrDefault<VsCode>(Sql.Builder.Where("vscode=@0", vscode));
                 if (code == null)
@@ -157,8 +157,15 @@ namespace Vote.Controllers
                 {
                     return RedirectToAction("index");
                 }
-                Vote_session vs1 = bs.FirstOrDefault<Vote_session>(Sql.Builder.Append("SELECT top 1 * FROM Vote_session ORDER BY EndSDate DESC"));
-               
+
+                Vote_session vs1 = bs.FirstOrDefault<Vote_session>(Sql.Builder.Append("SELECT * FROM Vote_session ORDER BY EndSDate DESC"));
+                if(vs1.StartDate==null){
+                      ViewBag.mag = "本轮投票尚未开始！";
+                }
+                if (vs1.EndSDate != null)
+                {
+                    ViewBag.mag = "本轮投票已经结束！";
+                }
                 Sql sql = new Sql();
                 sql.Append(@"SELECT a.*,b.SumVote FROM UserInfo a
                  LEFT JOIN (SELECT UserID,SUM(SumVote) SumVote FROM (                
@@ -176,6 +183,7 @@ namespace Vote.Controllers
                 {
                     list.Find(n => n.ID == item.UserID).UserDese = "(已投)";
                 }
+               
                 ViewBag.list = list;
                 ViewBag.info = vs1;
                 ViewBag.vscode = vscode;
@@ -295,7 +303,7 @@ namespace Vote.Controllers
         {
             return View();
         }
-        public ActionResult scorelist()
+        public ActionResult scorelist(int? order)
         {
             using (IDatabase bs = VoteDB.GetInstance())
             {
@@ -305,7 +313,15 @@ namespace Vote.Controllers
  SELECT b.UserID,CASE WHEN Vscode LIKE 'a%' THEN SumVote*3 ELSE SumVote END SumVote  FROM (                 
  SELECT UserID,Vscode, COUNT(*) SumVote FROM Vote_user GROUP BY UserID,Vscode) b) c GROUP BY c.UserID)b ON a.ID=b.UserID
                   ");
-                List<UserInfo> listuser = bs.Fetch<UserInfo>(sql).OrderByDescending(n => n.SumVote).ToList();
+
+                List<UserInfo> listuser = bs.Fetch<UserInfo>(sql);
+                if (order == 1)
+                {
+                    listuser = listuser.OrderBy(n => n.VsID).ToList();
+                }
+                else {
+                  listuser=  listuser.OrderByDescending(n => n.SumVote).ToList();
+                }
                 return View(listuser);
             }
         }

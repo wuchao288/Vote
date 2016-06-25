@@ -60,10 +60,10 @@
             </td>
          
             <td>
-                @Html.ActionLink("开始", "SetStart", new { id = item.ID })
+                @Html.ActionLink("开始", "SetStart", new { id = item.ID }, new { onclick = "return confirm('是否开启第" + item.Title + "？')" })
                 <br />
                 <br />
-                @Html.ActionLink("结束", "SetEnd", new { id = item.ID }) 
+                @Html.ActionLink("结束", "SetEnd", new { id = item.ID }, new { onclick = "return confirm('是否结束第" + item.Title + "？')" })
             </td>
         </tr>
     }
